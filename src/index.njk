@@ -5,11 +5,10 @@ layout: base
 {% include 'webring.njk' %}
 
 <div class="markdown">
-    <h2>What's this?</h2>
+    <h2>What is a webring?</h2>
     <p>
-        A community of sites around a common topic, also known as a <a href="https://en.wikipedia.org/wiki/Webring">webring</a>. 
-        Each member includes a badge on their site that links to the previous and next sites in the ring. 
-        Kids in the 90s used to love it!
+        A <a href="https://en.wikipedia.org/wiki/Webring">webring</a> is a community of sites around a common topic linked
+        together in a loop, where each site links to the next and previous ones, making it easy to browse through related content.
     </p>
 
     <h2>How to join</h2>
@@ -24,7 +23,18 @@ layout: base
 
     {% include 'signupform.njk' %}
 
-    <h2>Add the banner</h2>
+    <h2>This webring accepts</h2>
+    <p>
+        If you think you belong here, chances are you do. Developers, designers, and digital creatives from Landmark University,
+        whether current students or alumni, are welcome. Being listed requires:
+    </p>
+    <ul>
+        <li>A connection to Landmark University</li>
+        <li>A personal website</li>
+        <li>Using our webring code somewhere on your website</li>
+    </ul>
+
+    <h2>List the webring on your website</h2>
     <p>
         Once you've joined the ring, copy this code snippet into your site:
     </p>
@@ -36,4 +46,24 @@ layout: base
     </p>
 
     {% include 'snippet.njk' %}
+
+    <p>
+        If you want more control or to create a custom banner, copy and paste the below html snippet somewhere on your website:
+    </p>
+
+    {% highlight 'html' %}{% include 'code.njk' %}{% endhighlight %}
+
+    <p>
+        You can style the presentation of this code however you like, as long as it's done in an accessible way.
+    </p>
+
+    <h2>Webring links placement</h2>
+    <p>
+        I'm okay if you'd prefer people to land on your main landing page first, with the webring links placed elsewhere on the site, as long as they can be easily found within one click.
+    </p>
+
+    <h2>Who made this?</h2>
+    <p>
+        <a href="https://davidumoru.me/">David Umoru</a>, with help from <a href="https://github.com/maxboeck/webring">Max Böck's webring project</a> 
+    </p>
 </div>
