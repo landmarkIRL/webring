@@ -33,7 +33,7 @@ class WebringBanner extends HTMLElement {
         }
 
         .webring-banner__side {
-          background-color: #e7f9f3; /* lighter mint for side buttons */
+          background-color: #e7f9f3;
           padding: 1rem;
           display: flex;
           align-items: center;
@@ -41,6 +41,7 @@ class WebringBanner extends HTMLElement {
           width: 50px;
           cursor: pointer;
           border-right: 1px solid #d1fae5;
+          transition: background-color 0.2s;
         }
 
         .webring-banner__side:last-child {
@@ -48,11 +49,22 @@ class WebringBanner extends HTMLElement {
           border-right: none;
         }
 
+        .webring-banner__side:hover {
+          background-color: #ccf0e4;
+        }
+
         .webring-banner__center {
-          background-color: #ecfdf5; /* center mint */
+          background-color: #ecfdf5;
           flex: 1;
           text-align: center;
           padding: 1rem 1.5rem;
+          transition: background-color 0.2s, transform 0.2s;
+          text-decoration: none;
+        }
+
+        .webring-banner__center:hover {
+          background-color: #d1fae5;
+          transform: translateY(-2px);
         }
 
         .webring-banner__center h3 {
@@ -91,10 +103,10 @@ class WebringBanner extends HTMLElement {
         <a href="${this.url}/prev" class="webring-banner__side webring-banner__link" aria-label="Previous site">
           <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
         </a>
-        <div class="webring-banner__center">
+        <a href="https://webring.landmarkirl.xyz/" class="webring-banner__center" target="_blank" rel="noopener noreferrer">
           <h3>${this.ringtitle}</h3>
           <p>A webring for developers, designers who<br/>passed through Landmark University.</p>
-        </div>
+        </a>
         <a href="${this.url}/next" class="webring-banner__side webring-banner__link" aria-label="Next site">
           <svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" /></svg>
         </a>
