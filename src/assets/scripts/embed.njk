@@ -17,80 +17,169 @@ class WebringBanner extends HTMLElement {
     return `
       <style>
         :host {
-          display: block;
-          font-family: monospace;
+          --webring-bg: #ecfdf5;
+          --webring-text: #064e3b;
+          --webring-hover: #d1fae5;
+          --webring-border: #a7f3d0;
+          --webring-border-hover: #6ee7b7;
+          font-family: "JetBrains Mono", "Fira Mono", "Menlo", monospace;
           font-size: 16px;
-          color: #064e3b;
+          color: var(--webring-text);
+          display: block;
         }
 
-        .webring-banner {
+        .webring {
           display: flex;
-          border-radius: 6px;
+          align-items: stretch;
+          background: var(--webring-bg);
+          color: var(--webring-text);
+          border-radius: 10px;
+          border: 1.5px solid var(--webring-border);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
           overflow: hidden;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-          max-width: 800px;
-          margin: 1rem auto;
+          min-width: 0;
+          transition: border-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .webring-banner__side {
-          background-color: #e7f9f3;
-          padding: 1rem;
+        .main {
           display: flex;
           align-items: center;
-          justify-content: center;
-          width: 50px;
-          cursor: pointer;
-          border-right: 1px solid #d1fae5;
-          transition: background-color 0.2s;
-        }
-
-        .webring-banner__side:last-child {
-          border-left: 1px solid #d1fae5;
-          border-right: none;
-        }
-
-        .webring-banner__side:hover {
-          background-color: #ccf0e4;
-        }
-
-        .webring-banner__center {
-          background-color: #ecfdf5;
           flex: 1;
+          min-width: 0;
           text-align: center;
-          padding: 1rem 1.5rem;
-          transition: background-color 0.2s, transform 0.2s;
+          padding: 0;
+          position: relative;
+          background: transparent;
+          border-left: 1.5px solid var(--webring-border);
+          outline: none;
+          transition: background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
           text-decoration: none;
         }
 
-        .webring-banner__center:hover {
-          background-color: #d1fae5;
-          transform: translateY(-2px);
+        .main:focus-visible,
+        .main:hover {
+          background: var(--webring-hover);
+          z-index: 1;
         }
 
-        .webring-banner__center h3 {
+        .main-content {
+          padding: 1.1rem 1.5rem;
+          min-width: 0;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          gap: 0.3em;
+        }
+
+        .main h2 {
           margin: 0;
-          font-size: 1rem;
-          font-weight: bold;
-          text-decoration: underline;
-        }
-
-        .webring-banner__center p {
-          margin: 0.5rem 0 0;
-          font-size: 1rem;
-        }
-
-        .webring-banner__link {
-          color: #064e3b;
+          font-size: 1.15rem;
+          font-family: inherit;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          line-height: 1.2;
           text-decoration: none;
+          color: inherit;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .main span {
+          font-size: 0.98rem;
+          line-height: 1.4;
+          opacity: 0.85;
+          color: inherit;
+          white-space: normal;
+          overflow-wrap: break-word;
+        }
+
+        a {
+          text-decoration: none;
+          color: inherit;
+          outline: none;
+        }
+
+        .nav-button {
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-shrink: 0;
+          width: 48px;
+          background: transparent;
+          border: none;
+          transition:
+            background 0.15s cubic-bezier(0.4, 0, 0.2, 1),
+            color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+          cursor: pointer;
+          outline: none;
         }
 
-        .icon {
-          width: 24px;
-          height: 24px;
-          fill: #064e3b;
+        .nav-button:focus-visible,
+        .nav-button:hover {
+          background: var(--webring-hover);
+          color: var(--webring-text);
+        }
+
+        .nav-icon {
+          transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .prev:hover .nav-icon,
+        .prev:focus-visible .nav-icon {
+          transform: translateX(-1.5px);
+        }
+
+        .next:hover .nav-icon,
+        .next:focus-visible .nav-icon {
+          transform: translateX(1.5px);
+        }
+
+        .prev {
+          order: -1;
+        }
+        .next {
+          border-left: 1.5px solid var(--webring-border);
+        }
+
+        @media (max-width: 700px) {
+          .main-content {
+            padding: 0.8rem 1rem;
+          }
+          .main h2 {
+            font-size: 1rem;
+          }
+          .main span {
+            font-size: 0.92rem;
+          }
+          .nav-button {
+            width: 38px;
+          }
+          .nav-icon {
+            width: 22px;
+            height: 22px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .main-content {
+            padding: 0.7rem 0.7rem;
+          }
+          .main h2 {
+            font-size: 0.98rem;
+          }
+          .main span {
+            font-size: 0.88rem;
+          }
+          .nav-button {
+            width: 32px;
+          }
+          .nav-icon {
+            width: 18px;
+            height: 18px;
+          }
         }
       </style>
     `;
@@ -99,16 +188,48 @@ class WebringBanner extends HTMLElement {
   getTemplate() {
     return `
       ${this.getStyles()}
-      <div class="webring-banner">
-        <a href="${this.url}/prev" class="webring-banner__side webring-banner__link" aria-label="Previous site">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+      <div class="webring">
+        <a
+          rel="external"
+          referrerpolicy="strict-origin"
+          href="${this.url}/prev"
+          class="nav-button prev"
+          aria-label="Previous website"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="28"
+            height="28"
+            fill="currentColor"
+            class="nav-icon"
+          >
+            <path d="M7 18V6H9V18H7ZM11 12 17 6V18L11 12Z"></path>
+          </svg>
         </a>
-        <a href="https://webring.landmarkirl.xyz/" class="webring-banner__center" target="_blank" rel="noopener">
-          <h3>${this.ringtitle}</h3>
-          <p>A webring for developers and<br/>designers from Landmark University.</p>
+        <a class="main" href="https://webring.landmarkirl.xyz/" rel="external" tabindex="0">
+          <div class="main-content">
+            <h2>${this.ringtitle}</h2>
+            <span>A webring for developers and<br/>designers from Landmark University.</span>
+          </div>
         </a>
-        <a href="${this.url}/next" class="webring-banner__side webring-banner__link" aria-label="Next site">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" /></svg>
+        <a
+          rel="external"
+          referrerpolicy="strict-origin"
+          href="${this.url}/next"
+          class="nav-button next"
+          aria-label="Next website"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="28"
+            height="28"
+            fill="currentColor"
+            class="nav-icon"
+          >
+            <path d="M17 6 17 18H15L15 6 17 6ZM13 12 7 18V6L13 12Z"></path>
+          </svg>
         </a>
       </div>
     `;
